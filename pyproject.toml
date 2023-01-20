@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pfstools"
-version = "0.1.2"
+version = "0.2.0"
 authors = [
   { name="Jake Bridge", email="bridge.jake@gmail.com" },
 ]
-description = "Tools for my regular use. Particular to our work environment: SQL Server with Windows authentication"
+description = "Tools for my regular use. Particular to my work environment: SQL Server with Windows authentication"
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -18,5 +18,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://git.ucsf.edu/Jacob-Bridge/pfs-data-tools"
-"Bug Tracker" = "https://git.ucsf.edu/Jacob-Bridge/pfs-data-tools/issues"
+"Homepage" = "https://github.com/jakeb/pfs-data-tools"
+"Bug Tracker" = "https://github.com/jakeb/pfs-data-tools/issues"
