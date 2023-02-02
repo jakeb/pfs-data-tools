@@ -41,7 +41,7 @@ def sql_connection( server="", db=""):
     connection_string = f"Driver={{{driver}}};Server={server};Database={db};Trusted_Connection=yes;"
     connection_url = f"mssql+pyodbc:///?odbc_connect={quote_plus(connection_string)}"
 
-    return create_engine(connection_url).connect()
+    return pyodbc.connect(connection_url)
 
 def _read_sql(con,
     sql: 'str | Sequence[str]' ,
@@ -114,7 +114,11 @@ class SqlCnx:
         sql: 'str | Sequence[str]' ,
         server: 'str' ='',
         db : 'str' =''):
+
+
         with self.connection() as con:
+            if isinstance(sql, str):
+                sql = [sql]
             for q in list(sql):
                 con.execute(q)
  
