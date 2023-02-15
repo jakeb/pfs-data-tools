@@ -222,7 +222,7 @@ def to_excel(
 
     # outfile.save()
     if close_file:
-        outfile.save()
+        #outfile.save()
         outfile.close()
         return excel_path
     else:

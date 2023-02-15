@@ -1,6 +1,6 @@
 import pyodbc
 import pandas as pd
-from sqlalchemy import create_engine   
+from sqlalchemy import create_engine, text 
 from urllib.parse import quote_plus
 
 
@@ -41,7 +41,8 @@ def sql_connection( server="", db=""):
     connection_string = f"Driver={{{driver}}};Server={server};Database={db};Trusted_Connection=yes;"
     connection_url = f"mssql+pyodbc:///?odbc_connect={quote_plus(connection_string)}"
 
-    return pyodbc.connect(connection_url)
+    #return pyodbc.connect(connection_string)
+    return create_engine(connection_url).connect()
 
 def _read_sql(con,
     sql: 'str | Sequence[str]' ,
@@ -59,13 +60,13 @@ def _read_sql(con,
         if not isinstance(setup_sql, list):
             setup_sql = [setup_sql]
         for q in setup_sql:
-            con.execute(q)
+            con.execute(text(q))
     if isinstance(sql, dict):
-        df = { k : pd.read_sql(q, con) for k,q in sql.items()}
+        df = { k : pd.read_sql(text(q), con) for k,q in sql.items()}
     elif isinstance(sql, list):       
-        df = [pd.read_sql(q, con ) for q in sql]
+        df = [pd.read_sql(text(q), con ) for q in sql]
     else:
-        df = pd.read_sql(sql, con)
+        df = pd.read_sql(text(sql), con)
     
     return df
 
