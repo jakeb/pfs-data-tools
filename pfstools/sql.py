@@ -121,7 +121,7 @@ class SqlCnx:
             if isinstance(sql, str):
                 sql = [sql]
             for q in list(sql):
-                con.execute(q)
+                con.execute(text(q))
  
     def __exit__(self):
         if not self.cnx is None:
